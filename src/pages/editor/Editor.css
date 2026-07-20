@@ -37,7 +37,7 @@
   align-items: center;
   padding: 1rem;
   background: var(--color-list);
-  margin: 0 -1rem 0 -1rem;
+  margin: 0; /* Keep flush with card border-radius */
   background: linear-gradient(
     90deg,
     var(--color-list) 0%,
@@ -59,7 +59,18 @@
 }
 
 .editor__section {
-  margin-bottom: 3rem;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-list);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark .editor__section {
+  border-color: #555;
+  background-color: #222;
 }
 
 .editor__section i {
@@ -82,4 +93,45 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+}
+
+/* Ensure list items fit cleanly inside cards */
+.editor__section .list__inner {
+  margin: 0 !important;
+  width: 100% !important;
+  border-bottom: 2px solid var(--color-list);
+}
+
+.dark .editor__section .list__inner {
+  border-bottom-color: #444;
+}
+
+.editor__section .list__inner::before {
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* Add buttons layout inside section cards */
+.editor__section .button {
+  width: calc(100% - 2rem) !important;
+  margin: 1rem auto !important;
+}
+
+/* CSS Grid layout for editor columns on desktop */
+@media (min-width: 1024px) {
+  .editor__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1500px) {
+  .editor__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
 }

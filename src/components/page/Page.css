@@ -10,9 +10,10 @@
 
 .main--desktop {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   padding-top: 62px;
   min-height: 100vh;
+  width: 100%;
 }
 
 .main--compact {

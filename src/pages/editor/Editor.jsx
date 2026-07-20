@@ -308,343 +308,24 @@ export const Editor = ({ isMobile }) => {
               </ErrorMessage>
             ))}
         </section>
-        {list.lords && (
-          <section className="editor__section">
-            <header className="editor__header">
-              <h2>
-                <FormattedMessage id="editor.lords" />
-              </h2>
-              <p className="editor__points">
-                {lordsData.diff > 0 ? (
-                  <>
-                    <strong>{lordsData.diff}</strong>
-                    <FormattedMessage id="editor.tooManyPoints" />
-                    <Icon symbol="error" color="red" />
-                  </>
-                ) : (
-                  <>
-                    <strong>{lordsData.points - lordsPoints}</strong>
-                    <FormattedMessage id="editor.availablePoints" />
-                    <Icon symbol="check" />
-                  </>
-                )}
-              </p>
-            </header>
 
-            <OrderableUnitList
-              units={list.lords}
-              type="lords"
-              listId={listId}
-              armyComposition={armyComposition}
-            />
-
-            <Button
-              type="primary"
-              centered
-              to={`/editor/${listId}/add/lords`}
-              icon="add"
-              spaceTop
-            >
-              <FormattedMessage id="editor.add" />
-            </Button>
-          </section>
-        )}
-
-        {list.heroes && (
-          <section className="editor__section">
-            <header className="editor__header">
-              <h2>
-                <FormattedMessage id="editor.heroes" />
-              </h2>
-              <p className="editor__points">
-                {heroesData.diff > 0 ? (
-                  <>
-                    <strong>{heroesData.diff}</strong>
-                    <FormattedMessage id="editor.tooManyPoints" />
-                    <Icon symbol="error" color="red" />
-                  </>
-                ) : (
-                  <>
-                    <strong>{heroesData.points - heroesPoints}</strong>
-                    <FormattedMessage id="editor.availablePoints" />
-                    <Icon symbol="check" />
-                  </>
-                )}
-              </p>
-            </header>
-
-            <OrderableUnitList
-              units={list.heroes}
-              type="heroes"
-              listId={listId}
-              armyComposition={armyComposition}
-            />
-
-            <Button
-              type="primary"
-              centered
-              to={`/editor/${listId}/add/heroes`}
-              icon="add"
-              spaceTop
-            >
-              <FormattedMessage id="editor.add" />
-            </Button>
-          </section>
-        )}
-
-        {list.characters && (
-          <section className="editor__section">
-            <header className="editor__header">
-              <h2>
-                <FormattedMessage id="editor.characters" />
-              </h2>
-              <p className="editor__points">
-                {charactersData.diff > 0 ? (
-                  <>
-                    <strong>{charactersData.diff}</strong>
-                    <FormattedMessage id="editor.tooManyPoints" />
-                    <Icon symbol="error" color="red" />
-                  </>
-                ) : (
-                  <>
-                    <strong>{charactersData.points - charactersPoints}</strong>
-                    <FormattedMessage id="editor.availablePoints" />
-                    <Icon symbol="check" />
-                  </>
-                )}
-              </p>
-            </header>
-
-            <OrderableUnitList
-              units={list.characters}
-              type="characters"
-              listId={listId}
-              armyComposition={armyComposition}
-            />
-
-            {errors
-              .filter(({ section }) => section === "characters")
-              .map(({ message, name, diff, min, max, option }, index) => (
-                <ErrorMessage key={message + index} spaceBefore>
-                  <FormattedMessage
-                    id={message}
-                    values={{
-                      name,
-                      diff,
-                      min,
-                      max,
-                      option,
-                    }}
-                  />
-                </ErrorMessage>
-              ))}
-
-            <Button
-              type="primary"
-              centered
-              to={`/editor/${listId}/add/characters`}
-              icon="add"
-              spaceTop
-            >
-              <FormattedMessage id="editor.add" />
-            </Button>
-          </section>
-        )}
-
-        <section className="editor__section">
-          <header className="editor__header">
-            <h2>
-              <FormattedMessage id="editor.core" />
-            </h2>
-            <p className="editor__points">
-              {coreData.diff > 0 ? (
-                <>
-                  <strong>{coreData.diff}</strong>
-                  <FormattedMessage id="editor.missingPoints" />
-                  <Icon symbol="error" color="red" />
-                </>
-              ) : (
-                <>
-                  <strong>{corePoints}</strong>
-                  {` / ${coreData.points} `}
-                  <FormattedMessage id="app.points" />
-                  <Icon symbol="check" />
-                </>
-              )}
-            </p>
-          </header>
-
-          <OrderableUnitList
-            units={list.core}
-            type="core"
-            listId={listId}
-            armyComposition={armyComposition}
-          />
-
-          {errors
-            .filter(({ section }) => section === "core")
-            .map(({ message, name, min, max, diff, option }, index) => (
-              <ErrorMessage key={message + index} spaceBefore>
-                <FormattedMessage
-                  id={message}
-                  values={{
-                    name,
-                    min,
-                    max,
-                    diff,
-                    option,
-                  }}
-                />
-              </ErrorMessage>
-            ))}
-
-          <Button
-            type="primary"
-            centered
-            to={`/editor/${listId}/add/core`}
-            icon="add"
-            spaceTop
-          >
-            <FormattedMessage id="editor.add" />
-          </Button>
-        </section>
-
-        <section className="editor__section">
-          <header className="editor__header">
-            <h2>
-              <FormattedMessage id="editor.special" />
-            </h2>
-            <p className="editor__points">
-              {specialData.diff > 0 ? (
-                <>
-                  <strong>{specialData.diff}</strong>
-                  <FormattedMessage id="editor.tooManyPoints" />
-                  <Icon symbol="error" color="red" />
-                </>
-              ) : (
-                <>
-                  <strong>{specialData.points - specialPoints}</strong>
-                  <FormattedMessage id="editor.availablePoints" />
-                  <Icon symbol="check" />
-                </>
-              )}
-            </p>
-          </header>
-
-          <OrderableUnitList
-            units={list.special}
-            type="special"
-            listId={listId}
-            armyComposition={armyComposition}
-          />
-
-          {errors
-            .filter(({ section }) => section === "special")
-            .map(({ message, name, diff, min, max, option }, index) => (
-              <ErrorMessage key={message + index} spaceBefore>
-                <FormattedMessage
-                  id={message}
-                  values={{
-                    name,
-                    diff,
-                    min,
-                    max,
-                    option,
-                  }}
-                />
-              </ErrorMessage>
-            ))}
-
-          <Button
-            type="primary"
-            centered
-            to={`/editor/${listId}/add/special`}
-            icon="add"
-            spaceTop
-          >
-            <FormattedMessage id="editor.add" />
-          </Button>
-        </section>
-
-        <section className="editor__section">
-          <header className="editor__header">
-            <h2>
-              <FormattedMessage id="editor.rare" />
-            </h2>
-            <p className="editor__points">
-              {rareData.diff > 0 ? (
-                <>
-                  <strong>{rareData.diff}</strong>
-                  <FormattedMessage id="editor.tooManyPoints" />
-                  <Icon symbol="error" color="red" />
-                </>
-              ) : (
-                <>
-                  <strong>{rareData.points - rarePoints}</strong>
-                  <FormattedMessage id="editor.availablePoints" />
-                  <Icon symbol="check" />
-                </>
-              )}
-            </p>
-          </header>
-
-          <OrderableUnitList
-            units={list.rare}
-            type="rare"
-            listId={listId}
-            armyComposition={armyComposition}
-          />
-
-          {errors
-            .filter(({ section }) => section === "rare")
-            .map(({ message, name, diff, min, max, option }, index) => (
-              <ErrorMessage key={message + index} spaceBefore>
-                <FormattedMessage
-                  id={message}
-                  values={{
-                    name,
-                    diff,
-                    min,
-                    max,
-                    option,
-                  }}
-                />
-              </ErrorMessage>
-            ))}
-
-          <Button
-            type="primary"
-            centered
-            to={`/editor/${listId}/add/rare`}
-            icon="add"
-            spaceTop
-          >
-            <FormattedMessage id="editor.add" />
-          </Button>
-        </section>
-
-        {list.mercenaries &&
-          mercenariesData &&
-          armyComposition &&
-          list?.army !== "daemons-of-chaos" &&
-          list?.army !== "vampire-counts" && (
+        <div className="editor__grid">
+          {list.lords && (
             <section className="editor__section">
               <header className="editor__header">
                 <h2>
-                  <FormattedMessage id="editor.mercenaries" />
+                  <FormattedMessage id="editor.lords" />
                 </h2>
                 <p className="editor__points">
-                  {mercenariesData.diff > 0 ? (
+                  {lordsData.diff > 0 ? (
                     <>
-                      <strong>{mercenariesData.diff}</strong>
+                      <strong>{lordsData.diff}</strong>
                       <FormattedMessage id="editor.tooManyPoints" />
                       <Icon symbol="error" color="red" />
                     </>
                   ) : (
                     <>
-                      <strong>
-                        {mercenariesData.points - mercenariesPoints}
-                      </strong>
+                      <strong>{lordsData.points - lordsPoints}</strong>
                       <FormattedMessage id="editor.availablePoints" />
                       <Icon symbol="check" />
                     </>
@@ -653,14 +334,98 @@ export const Editor = ({ isMobile }) => {
               </header>
 
               <OrderableUnitList
-                units={list.mercenaries}
-                type="mercenaries"
+                units={list.lords}
+                type="lords"
+                listId={listId}
+                armyComposition={armyComposition}
+              />
+
+              <Button
+                type="primary"
+                centered
+                to={`/editor/${listId}/add/lords`}
+                icon="add"
+                spaceTop
+              >
+                <FormattedMessage id="editor.add" />
+              </Button>
+            </section>
+          )}
+
+          {list.heroes && (
+            <section className="editor__section">
+              <header className="editor__header">
+                <h2>
+                  <FormattedMessage id="editor.heroes" />
+                </h2>
+                <p className="editor__points">
+                  {heroesData.diff > 0 ? (
+                    <>
+                      <strong>{heroesData.diff}</strong>
+                      <FormattedMessage id="editor.tooManyPoints" />
+                      <Icon symbol="error" color="red" />
+                    </>
+                  ) : (
+                    <>
+                      <strong>{heroesData.points - heroesPoints}</strong>
+                      <FormattedMessage id="editor.availablePoints" />
+                      <Icon symbol="check" />
+                    </>
+                  )}
+                </p>
+              </header>
+
+              <OrderableUnitList
+                units={list.heroes}
+                type="heroes"
+                listId={listId}
+                armyComposition={armyComposition}
+              />
+
+              <Button
+                type="primary"
+                centered
+                to={`/editor/${listId}/add/heroes`}
+                icon="add"
+                spaceTop
+              >
+                <FormattedMessage id="editor.add" />
+              </Button>
+            </section>
+          )}
+
+          {list.characters && (
+            <section className="editor__section">
+              <header className="editor__header">
+                <h2>
+                  <FormattedMessage id="editor.characters" />
+                </h2>
+                <p className="editor__points">
+                  {charactersData.diff > 0 ? (
+                    <>
+                      <strong>{charactersData.diff}</strong>
+                      <FormattedMessage id="editor.tooManyPoints" />
+                      <Icon symbol="error" color="red" />
+                    </>
+                  ) : (
+                    <>
+                      <strong>{charactersData.points - charactersPoints}</strong>
+                      <FormattedMessage id="editor.availablePoints" />
+                      <Icon symbol="check" />
+                    </>
+                  )}
+                </p>
+              </header>
+
+              <OrderableUnitList
+                units={list.characters}
+                type="characters"
                 listId={listId}
                 armyComposition={armyComposition}
               />
 
               {errors
-                .filter(({ section }) => section === "mercenaries")
+                .filter(({ section }) => section === "characters")
                 .map(({ message, name, diff, min, max, option }, index) => (
                   <ErrorMessage key={message + index} spaceBefore>
                     <FormattedMessage
@@ -679,7 +444,7 @@ export const Editor = ({ isMobile }) => {
               <Button
                 type="primary"
                 centered
-                to={`/editor/${listId}/add/mercenaries`}
+                to={`/editor/${listId}/add/characters`}
                 icon="add"
                 spaceTop
               >
@@ -688,22 +453,79 @@ export const Editor = ({ isMobile }) => {
             </section>
           )}
 
-        {list.allies && alliesData && list?.army !== "daemons-of-chaos" && (
           <section className="editor__section">
             <header className="editor__header">
               <h2>
-                <FormattedMessage id="editor.allies" />
+                <FormattedMessage id="editor.core" />
               </h2>
               <p className="editor__points">
-                {alliesData.diff > 0 ? (
+                {coreData.diff > 0 ? (
                   <>
-                    <strong>{alliesData.diff}</strong>
+                    <strong>{coreData.diff}</strong>
+                    <FormattedMessage id="editor.missingPoints" />
+                    <Icon symbol="error" color="red" />
+                  </>
+                ) : (
+                  <>
+                    <strong>{corePoints}</strong>
+                    {` / ${coreData.points} `}
+                    <FormattedMessage id="app.points" />
+                    <Icon symbol="check" />
+                  </>
+                )}
+              </p>
+            </header>
+
+            <OrderableUnitList
+              units={list.core}
+              type="core"
+              listId={listId}
+              armyComposition={armyComposition}
+            />
+
+            {errors
+              .filter(({ section }) => section === "core")
+              .map(({ message, name, min, max, diff, option }, index) => (
+                <ErrorMessage key={message + index} spaceBefore>
+                  <FormattedMessage
+                    id={message}
+                    values={{
+                      name,
+                      min,
+                      max,
+                      diff,
+                      option,
+                    }}
+                  />
+                </ErrorMessage>
+              ))}
+
+            <Button
+              type="primary"
+              centered
+              to={`/editor/${listId}/add/core`}
+              icon="add"
+              spaceTop
+            >
+              <FormattedMessage id="editor.add" />
+            </Button>
+          </section>
+
+          <section className="editor__section">
+            <header className="editor__header">
+              <h2>
+                <FormattedMessage id="editor.special" />
+              </h2>
+              <p className="editor__points">
+                {specialData.diff > 0 ? (
+                  <>
+                    <strong>{specialData.diff}</strong>
                     <FormattedMessage id="editor.tooManyPoints" />
                     <Icon symbol="error" color="red" />
                   </>
                 ) : (
                   <>
-                    <strong>{alliesData.points - alliesPoints}</strong>
+                    <strong>{specialData.points - specialPoints}</strong>
                     <FormattedMessage id="editor.availablePoints" />
                     <Icon symbol="check" />
                   </>
@@ -712,14 +534,14 @@ export const Editor = ({ isMobile }) => {
             </header>
 
             <OrderableUnitList
-              units={list.allies}
-              type="allies"
+              units={list.special}
+              type="special"
               listId={listId}
               armyComposition={armyComposition}
             />
 
             {errors
-              .filter(({ section }) => section === "allies")
+              .filter(({ section }) => section === "special")
               .map(({ message, name, diff, min, max, option }, index) => (
                 <ErrorMessage key={message + index} spaceBefore>
                   <FormattedMessage
@@ -738,14 +560,195 @@ export const Editor = ({ isMobile }) => {
             <Button
               type="primary"
               centered
-              to={`/editor/${listId}/add/allies`}
+              to={`/editor/${listId}/add/special`}
               icon="add"
               spaceTop
             >
               <FormattedMessage id="editor.add" />
             </Button>
           </section>
-        )}
+
+          <section className="editor__section">
+            <header className="editor__header">
+              <h2>
+                <FormattedMessage id="editor.rare" />
+              </h2>
+              <p className="editor__points">
+                {rareData.diff > 0 ? (
+                  <>
+                    <strong>{rareData.diff}</strong>
+                    <FormattedMessage id="editor.tooManyPoints" />
+                    <Icon symbol="error" color="red" />
+                  </>
+                ) : (
+                  <>
+                    <strong>{rareData.points - rarePoints}</strong>
+                    <FormattedMessage id="editor.availablePoints" />
+                    <Icon symbol="check" />
+                  </>
+                )}
+              </p>
+            </header>
+
+            <OrderableUnitList
+              units={list.rare}
+              type="rare"
+              listId={listId}
+              armyComposition={armyComposition}
+            />
+
+            {errors
+              .filter(({ section }) => section === "rare")
+              .map(({ message, name, diff, min, max, option }, index) => (
+                <ErrorMessage key={message + index} spaceBefore>
+                  <FormattedMessage
+                    id={message}
+                    values={{
+                      name,
+                      diff,
+                      min,
+                      max,
+                      option,
+                    }}
+                  />
+                </ErrorMessage>
+              ))}
+
+            <Button
+              type="primary"
+              centered
+              to={`/editor/${listId}/add/rare`}
+              icon="add"
+              spaceTop
+            >
+              <FormattedMessage id="editor.add" />
+            </Button>
+          </section>
+
+          {list.mercenaries &&
+            mercenariesData &&
+            armyComposition &&
+            list?.army !== "daemons-of-chaos" &&
+            list?.army !== "vampire-counts" && (
+              <section className="editor__section">
+                <header className="editor__header">
+                  <h2>
+                    <FormattedMessage id="editor.mercenaries" />
+                  </h2>
+                  <p className="editor__points">
+                    {mercenariesData.diff > 0 ? (
+                      <>
+                        <strong>{mercenariesData.diff}</strong>
+                        <FormattedMessage id="editor.tooManyPoints" />
+                        <Icon symbol="error" color="red" />
+                      </>
+                    ) : (
+                      <>
+                        <strong>
+                          {mercenariesData.points - mercenariesPoints}
+                        </strong>
+                        <FormattedMessage id="editor.availablePoints" />
+                        <Icon symbol="check" />
+                      </>
+                    )}
+                  </p>
+                </header>
+
+                <OrderableUnitList
+                  units={list.mercenaries}
+                  type="mercenaries"
+                  listId={listId}
+                  armyComposition={armyComposition}
+                />
+
+                {errors
+                  .filter(({ section }) => section === "mercenaries")
+                  .map(({ message, name, diff, min, max, option }, index) => (
+                    <ErrorMessage key={message + index} spaceBefore>
+                      <FormattedMessage
+                        id={message}
+                        values={{
+                          name,
+                          diff,
+                          min,
+                          max,
+                          option,
+                        }}
+                      />
+                    </ErrorMessage>
+                  ))}
+
+                <Button
+                  type="primary"
+                  centered
+                  to={`/editor/${listId}/add/mercenaries`}
+                  icon="add"
+                  spaceTop
+                >
+                  <FormattedMessage id="editor.add" />
+                </Button>
+              </section>
+            )}
+
+          {list.allies && alliesData && list?.army !== "daemons-of-chaos" && (
+            <section className="editor__section">
+              <header className="editor__header">
+                <h2>
+                  <FormattedMessage id="editor.allies" />
+                </h2>
+                <p className="editor__points">
+                  {alliesData.diff > 0 ? (
+                    <>
+                      <strong>{alliesData.diff}</strong>
+                      <FormattedMessage id="editor.tooManyPoints" />
+                      <Icon symbol="error" color="red" />
+                    </>
+                  ) : (
+                    <>
+                      <strong>{alliesData.points - alliesPoints}</strong>
+                      <FormattedMessage id="editor.availablePoints" />
+                      <Icon symbol="check" />
+                    </>
+                  )}
+                </p>
+              </header>
+
+              <OrderableUnitList
+                units={list.allies}
+                type="allies"
+                listId={listId}
+                armyComposition={armyComposition}
+              />
+
+              {errors
+                .filter(({ section }) => section === "allies")
+                .map(({ message, name, diff, min, max, option }, index) => (
+                  <ErrorMessage key={message + index} spaceBefore>
+                    <FormattedMessage
+                      id={message}
+                      values={{
+                        name,
+                        diff,
+                        min,
+                        max,
+                        option,
+                      }}
+                    />
+                  </ErrorMessage>
+                ))}
+
+              <Button
+                type="primary"
+                centered
+                to={`/editor/${listId}/add/allies`}
+                icon="add"
+                spaceTop
+              >
+                <FormattedMessage id="editor.add" />
+              </Button>
+            </section>
+          )}
+        </div>
 
         <Button
           type="secondary"

@@ -327,9 +327,16 @@ hr {
 }
 
 .column {
-  width: 25%;
+  flex: 1 1 0%;
+  min-width: 0; /* Prevents flex children from overflowing */
   padding: 0 2rem 1rem 2rem;
   position: relative;
+  transition: all 0.2s ease;
+}
+
+.column:first-of-type {
+  flex: 0 0 350px;
+  max-width: 350px;
 }
 
 .column::before {

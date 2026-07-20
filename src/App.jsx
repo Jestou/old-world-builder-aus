@@ -157,30 +157,50 @@ export const App = () => {
                   <Route path="/editor/:listId">{<Editor />}</Route>
                 </Switch>
               </section>
-              <section className="column">
-                <Switch>
-                  <Route path="/editor/:listId/edit">{<EditList />}</Route>
-                  <Route path="/editor/:listId/export">{<Export />}</Route>
-                  <Route path="/editor/:listId/duplicate">
-                    <DuplicateList />
-                  </Route>
-                  <Route path="/editor/:listId/add/:type">{<Add />}</Route>
-                  <Route path="/editor/:listId/:type/:unitId">{<Unit />}</Route>
-                </Switch>
-              </section>
-              <section className="column">
-                <Switch>
-                  <Route path="/editor/:listId/:type/:unitId/magic/:command">
-                    <Magic />
-                  </Route>
-                  <Route path="/editor/:listId/:type/:unitId/rename">
-                    <Rename />
-                  </Route>
-                  <Route path="/editor/:listId/:type/:unitId/items/:group">
-                    <Magic />
-                  </Route>
-                </Switch>
-              </section>
+              <Route
+                path={[
+                  "/editor/:listId/edit",
+                  "/editor/:listId/export",
+                  "/editor/:listId/duplicate",
+                  "/editor/:listId/add/:type",
+                  "/editor/:listId/:type/:unitId"
+                ]}
+                render={() => (
+                  <section className="column">
+                    <Switch>
+                      <Route path="/editor/:listId/edit">{<EditList />}</Route>
+                      <Route path="/editor/:listId/export">{<Export />}</Route>
+                      <Route path="/editor/:listId/duplicate">
+                        <DuplicateList />
+                      </Route>
+                      <Route path="/editor/:listId/add/:type">{<Add />}</Route>
+                      <Route path="/editor/:listId/:type/:unitId">{<Unit />}</Route>
+                    </Switch>
+                  </section>
+                )}
+              />
+              <Route
+                path={[
+                  "/editor/:listId/:type/:unitId/magic/:command",
+                  "/editor/:listId/:type/:unitId/rename",
+                  "/editor/:listId/:type/:unitId/items/:group"
+                ]}
+                render={() => (
+                  <section className="column">
+                    <Switch>
+                      <Route path="/editor/:listId/:type/:unitId/magic/:command">
+                        <Magic />
+                      </Route>
+                      <Route path="/editor/:listId/:type/:unitId/rename">
+                        <Rename />
+                      </Route>
+                      <Route path="/editor/:listId/:type/:unitId/items/:group">
+                        <Magic />
+                      </Route>
+                    </Switch>
+                  </section>
+                )}
+              />
             </Main>
           </Route>
         </Switch>

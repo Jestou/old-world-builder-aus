@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 
 import { Header, Main } from "../../components/page";
 import { NumberInput } from "../../components/number-input";
-import { Select } from "../../components/select";
+import { SegmentedSelect } from "../../components/select";
 import { Icon } from "../../components/icon";
 import { updateList } from "../../state/lists";
 import { useLanguage } from "../../utils/useLanguage";
@@ -170,12 +170,11 @@ export const EditList = ({ isMobile }) => {
         <label htmlFor="composition-rule">
           <FormattedMessage id="new.armyCompositionRule" />
         </label>
-        <Select
+        <SegmentedSelect
           id="composition-rule"
           options={compositionRules}
           onChange={handleCompositionRuleChange}
           selected={list.compositionRule || "open-war"}
-          spaceBottom
         />
       </MainComponent>
     </>
