@@ -113,8 +113,9 @@
 
 /* Add buttons layout inside section cards */
 .editor__section .button {
-  width: calc(100% - 2rem) !important;
-  margin: 1rem auto !important;
+  display: block; /* Ensures margin: auto works properly */
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
 }
 
 /* CSS Grid layout for editor columns on desktop */

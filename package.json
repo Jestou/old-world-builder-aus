@@ -72,5 +72,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "allowScripts": {
+    "@sentry/cli@2.58.6": true,
+    "core-js-pure@3.49.0": true,
+    "esbuild@0.28.1": true
   }
 }
